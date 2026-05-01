@@ -21,7 +21,8 @@ class PauseSubState extends MusicBeatSubstate
 
 	var menuItems:Array<String> = [
 		'Resume',
-		'Toggle Practice Mode' /*, 'Toggle Botplay'*/,
+		'Toggle Practice Mode',
+		'Toggle Botplay',
 		'Restart Song',
 		'Exit to menu'
 	];
