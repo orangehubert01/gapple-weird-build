@@ -14,9 +14,6 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-#if desktop
-import Discord.DiscordClient;
-#end
 
 class OptionsMenu extends MusicBeatState
 {
@@ -36,9 +33,6 @@ class OptionsMenu extends MusicBeatState
 			Conductor.changeBPM(150);
 		}
 
-		#if desktop
-		DiscordClient.changePresence("In the Options Menu", null);
-		#end
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 
 		// wtf cynda

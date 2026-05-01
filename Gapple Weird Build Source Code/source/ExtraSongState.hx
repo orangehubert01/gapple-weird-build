@@ -13,9 +13,6 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
-#if desktop
-import Discord.DiscordClient;
-#end
 import sys.FileSystem;
 
 using StringTools;
@@ -84,8 +81,6 @@ class ExtraSongState extends MusicBeatState
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		}
 
-		#if desktop DiscordClient.changePresence("In the Extra Songs Menu", null); #end
-
 		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = 0xFF4965FF;
 		add(bg);
@@ -150,7 +145,7 @@ class ExtraSongState extends MusicBeatState
 				addWeek(['Poopers'], 0, ['awesome-son']);
 				addWeek(['The-Boopadoop-Song'], 4, ['cynda']);
 			default:
-				addWeek(['Sugar-Rush', 'Gift-Card', 'The-Big-Dingle', 'Dale', 'Origin'], 2, ['bandu', 'bandu', 'dingle', 'dale', 'bandu-origin']);
+				addWeek(['Sugar-Crash', 'Gift-Card', 'The-Big-Dingle', 'Dale', 'Origin'], 2, ['bandu', 'bandu', 'dingle', 'dale', 'bandu-origin']);
 				addWeek(['Apprentice'], 0, ['tristan']);
 				addWeek(['Resumed', 'Ready-Loud', 'Bookworm'], 2, ['dambu', 'flumpt', 'bookworm']);
 				addWeek(['Cuberoot', 'Alternate', 'Unhinged'], 1, ['disability', 'david', 'unhinged']);

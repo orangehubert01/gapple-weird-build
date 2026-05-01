@@ -48,7 +48,6 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import flash.system.System;
 #if desktop
-import Discord.DiscordClient;
 import lime.app.Application;
 import openfl.display.Application as OpenFLApplication;
 import openfl.display.Stage;
@@ -542,6 +541,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('wireframe/wireDialogue'));
 			case 'algebra':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('algebra/algebraDialogue'));
+			case 'unfairness':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('unfairness/unfairDialogue'));
 		}
 
 		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
@@ -637,11 +638,6 @@ class PlayState extends MusicBeatState
 		dadmirror.visible = false;
 
 		iconRPC = dad.iconRPC;
-
-		// Updating Discord Rich Presence.
-		#if desktop
-		DiscordClient.changePresence(SONG.song, "\nAcc: " + truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses, iconRPC);
-		#end
 
 		if (formoverride == "none" || formoverride == "bf")
 		{
@@ -1334,7 +1330,7 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
-				case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra':
+				case 'disruption' | 'applecore' | 'disability' | 'wireframe' | 'algebra' | 'unfairness':
 					schoolIntro(doof);
 				case 'origin':
 					originCutscene();
@@ -1429,13 +1425,21 @@ class PlayState extends MusicBeatState
 				bg.screenCenter();
 				bg.scrollFactor.set(0, 0);
 				add(bg);
-			case 'enforcers':
-				curStage = 'enforce';
-				defaultCamZoom = 0.85;
-				var bg = new FlxSprite(-200, -200).loadGraphic(Paths.image('enforcers/enforcersbg'));
-				bg.scale.set(1.5, 1.5);
-				bg.updateHitbox();
+			case 'unfairness':
+				curStage = 'unfairness';
+				defaultCamZoom = 0.9;
+				var bg = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/scarybg'));
+				bg.active = true;
 				add(bg);
+				unfairPart = true;
+				theFunne = false;
+				
+				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+				testshader.waveAmplitude = 0.1;
+				testshader.waveFrequency = 5;
+				testshader.waveSpeed = 2;
+				bg.shader = testshader.shader;
+				curbg = bg;
 			case 'the-big-dingle':
 				defaultCamZoom = 1.225;
 				curStage = 'dingle';
@@ -1614,7 +1618,7 @@ class PlayState extends MusicBeatState
 				ceil.scrollFactor.set(1.1, 1);
 				sprites.add(ceil);
 				add(ceil);
-			case 'sugar-rush' | 'gift-card':
+			case 'sugar-crash' | 'gift-card':
 				var pissCard:String = 'giftcard';
 				if (SONG.song.toLowerCase() != 'gift-card')
 				{
@@ -2668,9 +2672,6 @@ class PlayState extends MusicBeatState
 
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
-		#if desktop
-		DiscordClient.changePresence(SONG.song, "\nAcc: " + truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses, iconRPC);
-		#end
 		FlxG.sound.music.onComplete = endSong;
 
 		if (SONG.song.toLowerCase() == 'jambino')
@@ -3156,10 +3157,6 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
-			#if desktop
-			DiscordClient.changePresence("PAUSED on " + SONG.song, "Acc: " + truncateFloat(accuracy, 2) + "% | Score: " + songScore + " | Misses: " + misses,
-				iconRPC);
-			#end
 			if (!startTimer.finished)
 				startTimer.active = false;
 		}
@@ -3179,26 +3176,6 @@ class PlayState extends MusicBeatState
 			if (!startTimer.finished)
 				startTimer.active = true;
 			paused = false;
-
-			if (startTimer.finished)
-			{
-				#if desktop
-				DiscordClient.changePresence(SONG.song, "\nAcc: "
-					+ truncateFloat(accuracy, 2)
-					+ "% | Score: "
-					+ songScore
-					+ " | Misses: "
-					+ misses, iconRPC,
-					true, FlxG.sound.music.length
-					- Conductor.songPosition);
-				#end
-			}
-			else
-			{
-				#if desktop
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ") ", iconRPC);
-				#end
-			}
 		}
 
 		super.closeSubState();
@@ -3221,18 +3198,6 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = FlxG.sound.music.time;
 		vocals.time = Conductor.songPosition;
 		vocals.play();
-
-		#if desktop
-		DiscordClient.changePresence(detailsText
-			+ " "
-			+ SONG.song,
-			"\nAcc: "
-			+ truncateFloat(accuracy, 2)
-			+ "% | Score: "
-			+ songScore
-			+ " | Misses: "
-			+ misses, iconRPC);
-		#end
 	}
 
 	private var paused:Bool = false;
@@ -3964,9 +3929,6 @@ class PlayState extends MusicBeatState
 				switch (SONG.song.toLowerCase())
 				{
 					case 'penis':
-						#if desktop
-						DiscordClient.changePresence("Get back here. You aren't done.", null, null, true);
-						#end
 						FlxG.switchState(new GetBackState());
 					default:
 						CoolUtil.cheatersNeverProsper();
@@ -3999,25 +3961,16 @@ class PlayState extends MusicBeatState
 					case 'disruption':
 						SaveFileState.saveFile.data.elfMode ? {
 							FlxG.switchState(new ElfState());
-							#if desktop
-							DiscordClient.changePresence("The elf watches.", null, null, true);
-							#end
 						}:
 						{
 							PlayState.characteroverride = 'none';
 							PlayState.formoverride = 'none';
 							FlxG.switchState(new ChartingState());
-							#if desktop
-							DiscordClient.changePresence("Chart Editor", null, null, true);
-							#end
 						}
 					default:
 						PlayState.characteroverride = 'none';
 						PlayState.formoverride = 'none';
 						FlxG.switchState(new ChartingState());
-						#if desktop
-						DiscordClient.changePresence("Chart Editor", null, null, true);
-						#end
 				}
 			#if !debug} #end
 		}
@@ -4193,20 +4146,6 @@ class PlayState extends MusicBeatState
 				deathCounter++;
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 					.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
-
-				#if desktop
-				DiscordClient.changePresence("GAME OVER -- "
-					+ SONG.song
-					+ " ("
-					+ storyDifficultyText
-					+ ") ",
-					"\nAcc: "
-					+ truncateFloat(accuracy, 2)
-					+ "% | Score: "
-					+ songScore
-					+ " | Misses: "
-					+ misses, iconRPC);
-				#end
 			}
 
 			// FlxG.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
@@ -4455,7 +4394,7 @@ class PlayState extends MusicBeatState
 
 					switch (SONG.song.toLowerCase())
 					{
-						case 'applecore':
+						case 'applecore' | 'unfairness':
 							if (unfairPart) health -= (healthtolower / 12);
 						case 'disruption' | 'ripple' | 'minus-disruption':
 							health -= healthtolower / 2.65;
@@ -6218,17 +6157,6 @@ class PlayState extends MusicBeatState
 			if (dadmirror.holdTimer <= 0 && curStep % dadDanceSnap == 0)
 				dadmirror.dance(idleAlt);
 		}
-
-		#if desktop
-		DiscordClient.changePresence(SONG.song, "Acc: "
-			+ truncateFloat(accuracy, 2)
-			+ "% | Score: "
-			+ songScore
-			+ " | Misses: "
-			+ misses, iconRPC, true,
-			FlxG.sound.music.length
-			- Conductor.songPosition);
-		#end
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -6792,7 +6720,7 @@ class PlayState extends MusicBeatState
 						iconP2.changeIcon(dad.iconName);
 						iconP1.changeIcon(boyfriend.iconName);
 				}
-			case 'sugar-rush':
+			case 'sugar-crash':
 				switch (curBeat)
 				{
 					case 172:

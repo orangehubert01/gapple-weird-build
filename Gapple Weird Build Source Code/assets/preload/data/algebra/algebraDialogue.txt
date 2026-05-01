@@ -1,6 +1,17 @@
-:dave:Hey there!
-:dave:Welcome to my school!
-:dave:People don't visit me that often, so I'm glad you're here!
-:bf:Beep?
-:dave:Don't worry about my disability, I can get around myself.
-:bf:Bap!
+:dave:Hey man.
+:dave:Sorry all that's happening.
+:dave:Come and sit down, just take off your shoes first.
+:dave:Mom doesn't like shoes in the house.
+:bf:Fine by me!
+:bf:Thanks for inviting me here at all, [ ____ ].
+:dave:No problem dude, more than happy to have you over.
+:dave:Especially with everything happening, I think you definitely need some time away.
+:bf:Yea.. thanks for being understanding about it.
+:dave:You wanna watch a movie?
+:bf:Yeah dude! I don't really wanna play or anything either way.
+:bf:It's yucky outside.
+:dave:No worries! I getcha. Sucks that it's pouring rain though.
+:bf:Thanks man.
+:bf: For everything.
+:bf:I really do appreciate it.
+:bf:Much more  than I show.

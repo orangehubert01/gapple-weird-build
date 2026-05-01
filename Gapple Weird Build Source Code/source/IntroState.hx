@@ -23,9 +23,6 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
-#if desktop
-import Discord.DiscordClient;
-#end
 
 using StringTools;
 
@@ -46,6 +43,9 @@ class IntroState extends MusicBeatState
 		logo.animation.play('intro');
 		FlxTween.tween(logo, {alpha: 1}, 0.75);
 		FlxG.sound.play(Paths.sound('junk'));
+
+		FlxG.switchState(new TitleState());	
+
 		super.create();
 	}
 
@@ -63,7 +63,7 @@ class IntroState extends MusicBeatState
 				FlxG.switchState(new TitleState());
 			});
 		}
-
+		
 		super.update(elapsed);
 	}
 }

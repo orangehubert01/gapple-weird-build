@@ -45,7 +45,6 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import flash.system.System;
 #if desktop
-import Discord.DiscordClient;
 import lime.app.Application;
 import openfl.display.Application as OpenFLApplication;
 import openfl.display.Stage;
@@ -84,8 +83,6 @@ class ExtraCategorySelect extends MusicBeatState
 		skyMod.scale.set(2.4, 2.4);
 		skyMod.angle = 25;
 		skyMod.x = 1280 * 1.7;
-
-		#if desktop DiscordClient.changePresence("In the Extra Song Category Select Menu", null); #end
 
 		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = FlxColor.LIME;

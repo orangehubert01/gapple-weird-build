@@ -61,7 +61,7 @@ class CreditPopup extends FlxSpriteGroup
 			case 'strawberry':
 				funnyText.text = 'Song by Cynda and Grantare';
 				bitchyBalls.scale.set(2.25, 1);
-			case 'ready-loud' | 'comecful':
+			case 'ready-loud' | 'comecful' | 'unfairness':
 				funnyText.text = 'Song by MoldyGH';
 			case 'grantare-sings-unfairness':
 				funnyText.text = 'Song by MoldyGH\nImprovement by Grantare';

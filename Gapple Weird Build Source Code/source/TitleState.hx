@@ -24,9 +24,6 @@ import io.newgrounds.NG;
 import lime.app.Application;
 import Controls.KeyboardScheme;
 import openfl.Assets;
-#if desktop
-import Discord.DiscordClient;
-#end
 
 using StringTools;
 
@@ -240,7 +237,10 @@ class TitleState extends MusicBeatState
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-				FlxG.switchState(OutdatedSubState.leftState ? new MainMenuState() : new OutdatedSubState());
+				var random:Int = FlxG.random.int(0, 99);
+				
+				if (random == 99) FlxG.switchState(new CopyProtectionState());
+				else FlxG.switchState(OutdatedSubState.leftState ? new MainMenuState() : new OutdatedSubState());
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}
