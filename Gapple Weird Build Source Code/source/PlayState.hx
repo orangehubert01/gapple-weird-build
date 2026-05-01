@@ -246,7 +246,6 @@ class PlayState extends MusicBeatState
 		'bambi-unfair',
 		'bambi-3d',
 		'bambi-piss-3d',
-		'badai',
 		'unfair-junker',
 		'tunnel-dave',
 		'robot-guy',
@@ -391,8 +390,6 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 
 	public var redTunnel:FlxSprite;
-
-	public var daveFuckingDies:PissBoy;
 
 	var ringCounter:FlxSprite;
 	var counterNum:FlxText;
@@ -607,17 +604,8 @@ class PlayState extends MusicBeatState
 		}
 
 		dad = new Character(100, 100, SONG.player2);
-		if (SONG.song.toLowerCase() == 'wireframe')
-		{
-			badai = new Character(-1250, -1250, 'badai');
-		}
-		else if(SONG.song.toLowerCase() == 'minus-wireframe')
-		{
-			badai = new Character(-500, -560, 'batai');
-			badai.screenCenter();
-			badai.alpha = 0;
-		}
-		else if (SONG.song.toLowerCase() == 'the-big-dingle')
+
+		if (SONG.song.toLowerCase() == 'the-big-dingle')
 			badai = new Character(dad.x + 275, dad.y + 45, 'donk');
 		else if (SONG.song.toLowerCase() == 'resumed')
 			badai = new Character(dad.x - 350, -600, 'dambu');
@@ -819,7 +807,7 @@ class PlayState extends MusicBeatState
 		if (swagger != null)
 			add(swagger);
 
-		if (SONG.song.toLowerCase() != 'wireframe' && SONG.song.toLowerCase() != 'origin' && SONG.song.toLowerCase() != 'ugh' && SONG.song.toLowerCase() != 'cotton-candy' && SONG.song.toLowerCase() != 'the-big-dingle')
+		if (SONG.song.toLowerCase() != 'wireframe' && SONG.song.toLowerCase() != 'origin' && SONG.song.toLowerCase() != 'ugh' && SONG.song.toLowerCase() != 'the-big-dingle')
 			add(dad);
 		add(boyfriend);
 		add(dadmirror);
@@ -884,7 +872,7 @@ class PlayState extends MusicBeatState
 				dad.y += 175;
 			}
 
-			if(SONG.song.toLowerCase() == 'wireframe' || SONG.song.toLowerCase() == 'cotton-candy')
+			if(SONG.song.toLowerCase() == 'wireframe')
 			{
 				boyfriend.y -= 190;
 			}
@@ -894,27 +882,12 @@ class PlayState extends MusicBeatState
 		{
 			add(badai);
 			badai.visible = false;
-
-			if (SONG.song.toLowerCase() == 'ferocious' || SONG.song.toLowerCase() == 'minus-wireframe') {
-				badai.alpha = 0;
-				badai.visible = true;
-			}
 		}
 
 		if (SONG.song.toLowerCase() == 'the-big-dingle')
 			add(dad);
 
-		if (curStage == 'redTunnel')
-		{
-			if(SONG.song.toLowerCase() != 'minus-wireframe')
-			{
-				dad.x -= 150;
-				dad.y -= 100;
-				boyfriend.x -= 150;
-				boyfriend.y -= 150;
-			}
-			gf.visible = false;
-		}
+		if (curStage == 'redTunnel') gf.visible = false;
 
 		if (dad.curCharacter == 'bandu-origin')
 		{
@@ -1145,10 +1118,6 @@ class PlayState extends MusicBeatState
 		{
 			case 'sunshine':
 				preload('characters/bandoll_lightsoff');
-			case 'wireframe':
-				preload('characters/badai');
-			case 'minus-wireframe':
-				preload('characters/batai');
 			case 'algebra':
 				preload('characters/HALL_MONITOR');
 				preload('characters/diamondMan');
@@ -1217,7 +1186,7 @@ class PlayState extends MusicBeatState
 		preload('pixelUi/combo-pixel');
 
 		var iconP1IsPlayer:Bool = true;
-		if(SONG.song.toLowerCase() == 'wireframe' || SONG.song.toLowerCase() == 'cotton-candy' || SONG.song.toLowerCase() == 'minus-wireframe')
+		if(SONG.song.toLowerCase() == 'wireframe')
 		{
 			iconP1IsPlayer = false;
 		}
@@ -2211,7 +2180,7 @@ class PlayState extends MusicBeatState
 				}
 
 
-			case 'wireframe' | 'cotton-candy' | 'minus-wireframe':
+			case 'wireframe':
 				defaultCamZoom = 0.67;
 				curStage = 'redTunnel';
 				var stupidFuckingRedBg = new FlxSprite().makeGraphic(9999, 9999, FlxColor.fromRGB(42, 0, 0)).screenCenter();
@@ -2221,17 +2190,7 @@ class PlayState extends MusicBeatState
 				redTunnel.updateHitbox();
 				sprites.add(redTunnel);
 				add(redTunnel);
-				daveFuckingDies = new PissBoy(0, 0);
-				daveFuckingDies.screenCenter();
-				daveFuckingDies.y = 1500;
-				add(daveFuckingDies);
-				daveFuckingDies.visible = false;
-				if(song == 'minus-wireframe')
-				{
-					defaultCamZoom = 1;
-					redTunnel.screenCenter();
-				}
-			case 'wheels' | 'awesome' | 'poopers' | 'speed':
+			case 'wheels' | 'awesome' | 'poopers':
 				curStage = 'wheels';
 
 				var bg = new FlxSprite(150, 100).loadGraphic(Paths.image('wheels/swag'));
@@ -3284,7 +3243,7 @@ class PlayState extends MusicBeatState
 			redTunnel.angle += elapsed * 3.5;
 		}
 		banduJunk += elapsed * 2.5;
-		if(badaiTime && SONG.song.toLowerCase() != 'minus-wireframe' && SONG.song.toLowerCase() != 'ferocious' && SONG.song.toLowerCase() != 'jambino' && SONG.song.toLowerCase() != 'the-big-dingle' && SONG.song.toLowerCase() != 'resumed')
+		if(badaiTime && SONG.song.toLowerCase() != 'the-big-dingle' && SONG.song.toLowerCase() != 'resumed')
 		{
 			dad.angle += elapsed * 50;
 		}
@@ -3352,38 +3311,6 @@ class PlayState extends MusicBeatState
 
 		if (isRing)
 			counterNum.text = Std.string(cNum);
-
-		// dvd screensaver lookin ass
-		if (daveFuckingDies != null && redTunnel != null && !daveFuckingDies.inCutscene)
-		{
-			FlxG.watch.addQuick("DAVE JUNK!!?!?!", [daveFuckingDies.x, daveFuckingDies.y]);
-			if (daveFuckingDies.x >= (redTunnel.width - 1000) || daveFuckingDies.y >= (redTunnel.height - 1000))
-			{
-				daveFuckingDies.bounceAnimState = 1;
-				daveFuckingDies.bounceMultiplier = FlxG.random.float(-0.75, -1.15);
-				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
-				daveFuckingDies.dance();
-			}
-			else if (daveFuckingDies.x <= (redTunnel.x + 100) || daveFuckingDies.y <= (redTunnel.y + 100))
-			{
-				daveFuckingDies.bounceAnimState = 2;
-				daveFuckingDies.bounceMultiplier = FlxG.random.float(0.75, 1.15);
-				daveFuckingDies.yBullshit = FlxG.random.float(0.95, 1.05);
-				daveFuckingDies.dance();
-			}
-			else if (daveFuckingDies.x >= (redTunnel.width - 1150) || daveFuckingDies.y >= (redTunnel.height - 1150))
-			{
-				daveFuckingDies.bounceAnimState = 1;
-			}
-			else if (daveFuckingDies.x <= (redTunnel.x + 250) || daveFuckingDies.y <= (redTunnel.y + 250))
-			{
-				daveFuckingDies.bounceAnimState = 2;
-			}
-			else
-			{
-				daveFuckingDies.bounceAnimState = 0;
-			}
-		}
 
 		playerStrums.forEach(function(spr:Strum)
 		{
@@ -3626,10 +3553,6 @@ class PlayState extends MusicBeatState
 
 					dadmirror.visible = dadFront;
 					dad.visible = !dadFront;
-				case 'badai' | 'batai':
-					dad.angle = Math.sin(elapsedtime) * 15;
-					dad.x += Math.sin(elapsedtime) * 0.6;
-					dad.y += (Math.sin(elapsedtime) * 0.6);
 				case 'ringi':
 					dad.y += (Math.sin(elapsedtime) * 0.6);
 					dad.x += (Math.sin(elapsedtime) * 0.6);
@@ -3665,10 +3588,6 @@ class PlayState extends MusicBeatState
 					{
 						badai.x += Math.sin(elapsedtime) * 0.6;
 					}
-				case 'badai' | 'batai':
-					badai.angle = Math.sin(elapsedtime) * 15;
-					badai.x += Math.sin(elapsedtime) * 0.6;
-					badai.y += (Math.sin(elapsedtime) * 0.6);
 				case 'car' | 'donk':
 
 				case 'dambu':
@@ -4026,7 +3945,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (PlayState.SONG.song.toLowerCase() == 'penis')
+		/*if (PlayState.SONG.song.toLowerCase() == 'penis')
 		{
 			if (FlxG.keys.justPressed.EIGHT || FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.ZERO)
 				FlxG.switchState(new GetBackState());
@@ -4051,7 +3970,7 @@ class PlayState extends MusicBeatState
 				PlayState.formoverride = 'none';
 				FlxG.switchState(new AnimationDebug(gf.curCharacter));
 			}
-		}
+		}*/
 
 		if (startingSong)
 		{
@@ -4644,11 +4563,6 @@ class PlayState extends MusicBeatState
 
 			if (boyfriend.curCharacter == 'froing')
 				camFollow.y += 30;
-
-			if(SONG.song.toLowerCase() == 'minus-wireframe')
-			{
-				defaultCamZoom = 1.1;
-			}
 
 			if (SONG.song.toLowerCase() == 'tutorial')
 			{
@@ -6372,10 +6286,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-		if (curBeat % danceBeatSnap == 0 && daveFuckingDies != null)
-		{
-			daveFuckingDies.dance();
-		}
+
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, FlxSort.DESCENDING);
@@ -6825,60 +6736,7 @@ class PlayState extends MusicBeatState
 						vocals.volume = 1;
 					case 519:
 						FlxTween.tween(littleIdiot, {alpha: 1}, 1.4, {ease: FlxEase.circOut});
-					case 527:
-						FlxTween.tween(littleIdiot, {"scale.x": littleIdiot.scale.x + 2.1, "scale.y": littleIdiot.scale.y + 2.1}, 1.35, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								iconP2.changeIcon(littleIdiot.iconName);
-								orbit = false;
-								dad.visible = dadmirror.visible = swagger.visible = false;
-								var derez = new FlxSprite(dad.getMidpoint().x, dad.getMidpoint().y).loadGraphic(Paths.image('applecore/monkey_guy'));
-								derez.scale.set(0.8, 0.8);
-								derez.updateHitbox();
-								derez.setPosition(derez.x - derez.width / 2, derez.y - derez.height / 2);
-								derez.antialiasing = false;
-								add(derez);
-								var deez = new FlxSprite(swagger.getMidpoint().x, swagger.getMidpoint().y).loadGraphic(Paths.image('applecore/monkey_person'));
-								deez.setPosition(deez.x - deez.width / 2, deez.y - deez.height / 2);
-								deez.antialiasing = false;
-								add(deez);
-								var swagsnd = new FlxSound().loadEmbedded(Paths.sound('suck'));
-								swagsnd.play(true);
-								var whatthejunk = new FlxSound().loadEmbedded(Paths.sound('suckEnd'));
-								littleIdiot.playAnim('inhale');
-								littleIdiot.animation.finishCallback = function(d:String)
-								{
-									swagsnd.stop();
-									whatthejunk.play(true);
-									littleIdiot.animation.finishCallback = null;
-								};
-								new FlxTimer().start(0.2, function(tmr:FlxTimer)
-								{
-									FlxTween.tween(deez, {
-										"scale.x": 0.1,
-										"scale.y": 0.1,
-										x: littleIdiot.getMidpoint().x - deez.width / 2,
-										y: littleIdiot.getMidpoint().y - deez.width / 2 - 400
-									}, 0.65, {ease: FlxEase.quadIn});
-									FlxTween.angle(deez, 0, 360, 0.65, {ease: FlxEase.quadIn, onComplete: function(twn:FlxTween) deez.kill()});
-
-									FlxTween.tween(derez, {
-										"scale.x": 0.1,
-										"scale.y": 0.1,
-										x: littleIdiot.getMidpoint().x - derez.width / 2 - 100,
-										y: littleIdiot.getMidpoint().y - derez.width / 2 - 500
-									}, 0.65, {ease: FlxEase.quadIn});
-									FlxTween.angle(derez, 0, 360, 0.65, {ease: FlxEase.quadIn, onComplete: function(twn:FlxTween) derez.kill()});
-
-									new FlxTimer().start(1, function(tmr:FlxTimer)
-									{
-										poipInMahPahntsIsGud = true;
-										iconRPC = 'icon_unfair_junker';
-									});
-								});
-							}
-						});
+						poipInMahPahntsIsGud = true;
 				}
 			case 'recovered-project':
 				switch (curBeat)
@@ -6895,98 +6753,7 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(thunderBlack, {alpha: 0}, 1);
 						iconP2.changeIcon(dad.iconName);
 				}
-			case 'wireframe':
-				FlxG.camera.shake(0.005, Conductor.crochet / 1000);
-				switch (curBeat)
-				{
-					case 254:
-						badai.visible = true;
-						new FlxTimer().start((Conductor.crochet / 1000) * 0.5, function(tmr:FlxTimer)
-						{
-							FlxTween.tween(badai, {x: -300, y: 100}, (Conductor.crochet / 1000) * 1.5, {ease: FlxEase.cubeIn});
-						});
-					// FlxTween.tween(dad, {x: 1500, y: 1500}, Conductor.crochet / 1000, {ease: FlxEase.cubeIn});
-					case 256:
-						creditsWatermark.text = 'Screw you!';
-						kadeEngineWatermark.y -= 20;
-						dad.visible = false;
-						var baldiBasic:FlxSprite = new FlxSprite(dad.x, dad.y);
-						baldiBasic.frames = daveFuckingDies.frames;
-						baldiBasic.animation.addByPrefix('HI', 'IDLE', 24, false);
-						baldiBasic.animation.play("HI");
-						baldiBasic.x = dad.getMidpoint().x - baldiBasic.width / 2;
-						baldiBasic.y = dad.getMidpoint().y - baldiBasic.height / 2;
-						add(baldiBasic);
-						FlxTween.tween(baldiBasic, {x: baldiBasic.x + 100, y: baldiBasic.y + 500}, 0.15, {
-							ease: FlxEase.cubeOut,
-							onComplete: function(twn:FlxTween)
-							{
-								baldiBasic.kill();
-								remove(baldiBasic);
-								baldiBasic.destroy();
-							}
-						});
-						// this transition was lazy and dumb lets do it better
-						FlxG.camera.flash(FlxColor.WHITE, 1);
-						/*
-								remove(dad);
-								//badai time
-								dad = new Character(-300, 100, 'badai', false);
-								add(dad);
-								iconP2.animation.play('badai', true);
-								daveFuckingDies.visible = true; */ camMoveAllowed = false;
-						badaiTime = true;
-						// boyfriend.canDance = false;
-						// boyfriend.playAnim('turn', true);
-						new FlxTimer().start(1, function(tmr:FlxTimer)
-						{
-							camMoveAllowed = true;
-							var position = boyfriend.getPosition();
-							var width = boyfriend.width;
-							/*
-									remove(boyfriend);
-									boyfriend = new Boyfriend(position.x, position.y, 'tunnel-bf-flipped');
-									add(boyfriend);
-								 */
-							// boyfriendOldIcon = 'bf-old-flipped';
-							// iconP1.animation.play('tunnel-bf-flipped');
-							iconP2.changeIcon(badai.iconName);
-							iconRPC = 'icon_badai';
-							daveFuckingDies.visible = true;
-							FlxTween.tween(daveFuckingDies, {y: -300}, 2.5, {ease: FlxEase.cubeInOut});
-							new FlxTimer().start(2.5, function(tmr:FlxTimer)
-							{
-								daveFuckingDies.inCutscene = false;
-							});
-						});
-				}
-			case 'minus-wireframe':
-				FlxG.camera.shake(0.005, Conductor.crochet / 1000);
-				switch(curBeat)
-				{
-					case 254:
-						FlxTween.tween(badai, {alpha: 1}, (Conductor.crochet / 1000) * 2);
-					case 256:
-						creditsWatermark.text = 'Screw you!';
-						kadeEngineWatermark.y -= 20;
-						dad.canDance = false;
-						dad.playAnim('splode', true);
-						dad.animation.finishCallback = function theDeezers(sucky:String)
-						{
-							dad.visible = false;
-							dad.animation.finishCallback = null;
-						}
-						FlxG.camera.flash(FlxColor.WHITE, 0.5);
-						camMoveAllowed = false;
-						badaiTime = true;
-						new FlxTimer().start(1, function(tmr:FlxTimer)
-						{
-							camMoveAllowed = true;
-							iconP2.changeIcon(badai.iconName);
-							iconRPC = 'icon_badai';
-							doMinusJunket();
-						});
-				}
+
 			case 'the-big-dingle':
 				if (curBeat == 148)
 				{
