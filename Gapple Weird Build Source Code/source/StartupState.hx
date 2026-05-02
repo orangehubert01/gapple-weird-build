@@ -24,9 +24,6 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
-#if desktop
-import Discord.DiscordClient;
-#end
 
 using StringTools;
 
@@ -60,10 +57,6 @@ class StartupState extends MusicBeatState
 		PlayerSettings.init();
 		if (!initialized)
 		{
-			#if desktop
-			DiscordClient.initialize();
-			#end
-
 			var diamond:FlxGraphic = FlxGraphic.fromClass(GraphicTransTileDiamond);
 			diamond.persist = true;
 			diamond.destroyOnNoUse = false;

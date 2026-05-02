@@ -3189,6 +3189,29 @@ class Character extends FlxSprite
 				nativelyPlayable = true;
 
 				iconName = 'bf';
+
+			case 'bambi-unfair':
+				tex = Paths.getSparrowAtlas('characters/unfair_bambi');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'singUP', 24, false);
+				animation.addByPrefix('singRIGHT', 'singRIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'singDOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'singLEFT', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP", 140, 70);
+				addOffset("singRIGHT", -180, -60);
+				addOffset("singLEFT", 250, 0);
+				addOffset("singDOWN", 150, 50);
+
+				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+
+				iconName = 'unfair';
 		}
 		dance();
 

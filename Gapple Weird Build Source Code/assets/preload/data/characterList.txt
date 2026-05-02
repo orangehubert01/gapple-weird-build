@@ -42,3 +42,4 @@ diamond-man
 playrobot
 playrobot-crazy
 hall-monitor
+bambi-unfair

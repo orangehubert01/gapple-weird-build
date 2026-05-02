@@ -311,7 +311,8 @@ class GameOverSubstate extends MusicBeatSubstate
 			}
 			else if (PlayState.SONG.song.toLowerCase() == 'penis')
 				FlxG.switchState(new GetBackState());
-			else {
+			else
+			{
 				PlayState.practicing = false;
 
 				PlayState.fakedScore = false;

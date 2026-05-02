@@ -85,6 +85,9 @@ class DialogueBox extends FlxSpriteGroup
 				case 'applecore':
 					FlxG.sound.playMusic(Paths.music('applecoreCutscene'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
+				case 'unfairness':
+					FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
+					FlxG.sound.music.fadeIn(1, 0, 0.8);
 			}
 		}
 
@@ -114,7 +117,7 @@ class DialogueBox extends FlxSpriteGroup
 				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
 				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
 				box.antialiasing = true;
-			case 'disruption' | 'wireframe':
+			case 'disruption' | 'wireframe' | 'unfairness':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.scrollFactor.set();
@@ -140,7 +143,7 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'disability' | 'algebra' | 'wireframe' | 'future':
 				portraitLeftCharacter = 'dave';
-			case 'disruption' | 'applecore':
+			case 'disruption' | 'applecore' | 'unfairness':
 				portraitLeftCharacter = 'bambi';
 		}
 
@@ -370,6 +373,9 @@ class DialogueBox extends FlxSpriteGroup
 					case 'applecore':
 						portrait.portraitPath = 'dialogue/bandu_portrait';
 						portrait.portraitPrefix = 'bandu portrait';
+					case 'unfairness':
+						portrait.portraitPath = 'dialogue/unfairnessPortrait';
+						portrait.portraitPrefix = 'bambi unfairness portrait';
 					default:
 						portrait.portraitPath = 'dialogue/bambi_corntheft';
 						portrait.portraitPrefix = 'bambi corntheft portrait';
