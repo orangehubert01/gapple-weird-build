@@ -86,7 +86,7 @@ class CreditPopup extends FlxSpriteGroup
 				funnyText.text = 'Song by BeastlyChip';
 				bitchyBalls.scale.set(1.15, 1);
 			case 'sillier':
-				funnyText.text = 'Song by Bmv277';
+				funnyText.text = 'Song by ?';
 		}
 		add(funnyText);
 	}

@@ -1074,7 +1074,7 @@ class PlayState extends MusicBeatState
 			case 'krunker':
 				credits = 'OC created by Cynda!';
 			case 'sillier':
-				credits = 'OC created by Bmv277!';
+				credits = '😀';
 			case 'cooking-lesson':
 				credits = 'OC created by Alexander Cooper 19!';
 			case 'suave':
