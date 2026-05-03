@@ -222,13 +222,13 @@ class Character extends FlxSprite
 				iconRPC = 'icon_blogblez';
 			case 'da-apprentice':
 				// GARRETT SHITE ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/tristan');
+				tex = Paths.getSparrowAtlas('characters/dont_trip_tristan');
 				frames = tex;
-				animation.addByPrefix('idle', 'idle', 24, false);
-				animation.addByPrefix('singUP', 'up', 24, false);
-				animation.addByPrefix('singRIGHT', 'right', 24, false);
-				animation.addByPrefix('singDOWN', 'down', 24, false);
-				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('idle', 'idle', 12, false);
+				animation.addByPrefix('singUP', 'up', 12, false);
+				animation.addByPrefix('singRIGHT', 'right', 12, false);
+				animation.addByPrefix('singDOWN', 'down', 12, false);
+				animation.addByPrefix('singLEFT', 'left', 12, false);
 
 				addOffset('idle');
 				addOffset("singUP", 21 * 0.9, 98 * 0.9);
@@ -238,7 +238,7 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
-				scale.set(0.9, 0.9);
+				//scale.set(0.9, 0.9);
 				updateHitbox();
 
 				iconName = 'tristan';
@@ -895,35 +895,6 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				iconName = '3d-bf';
-
-				playAnim('idle');
-			case 'bookworm':
-				frames = Paths.getSparrowAtlas('characters/bookworm');
-				animation.addByPrefix('idle', 'bambi idle0', 24, false);
-				animation.addByPrefix('singUP', 'bambi up0', 24, false);
-				animation.addByPrefix('singLEFT', 'bambi left0', 24, false);
-				animation.addByPrefix('singRIGHT', 'bambi right0', 24, false);
-				animation.addByPrefix('singDOWN', 'bambi down0', 24, false);
-				animation.addByPrefix('idle-alt', 'bambi idle mad0', 24, false);
-				animation.addByPrefix('singUP-alt', 'bambi up mad0', 24, false);
-				animation.addByPrefix('singLEFT-alt', 'bambi left mad0', 24, false);
-				animation.addByPrefix('singRIGHT-alt', 'bambi right mad0', 24, false);
-				animation.addByPrefix('singDOWN-alt', 'bambi down mad0', 24, false);
-
-				addOffset('idle');
-				addOffset("singUP", 27, 43);
-				addOffset("singRIGHT", 107, -10);
-				addOffset("singLEFT", 50);
-				addOffset("singDOWN", 30, -13);
-				addOffset('idle-alt', 90, -30);
-				addOffset("singUP-alt", 30, 44);
-				addOffset("singRIGHT-alt", 107, -10);
-				addOffset("singLEFT-alt", 47, -3);
-				addOffset("singDOWN-alt", 31, -8);
-
-				iconName = 'bookworm';
-
-				iconRPC = 'icon_bookworm';
 
 				playAnim('idle');
 			case 'hang-bf':
@@ -2446,56 +2417,6 @@ class Character extends FlxSprite
 				iconName = 'gross';
 
 				iconRPC = 'icon_gross';
-
-			case 'badai':
-				// BADAI SHITE ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/badai');
-				frames = tex;
-				animation.addByPrefix('idle', 'IDLE', 24, false);
-				animation.addByPrefix('singUP', 'UP', 24, false);
-				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
-				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
-
-				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singRIGHT");
-				addOffset("singLEFT");
-				addOffset("singDOWN");
-				setGraphicSize(Std.int(width * furiosityScale), Std.int(height * furiosityScale));
-				updateHitbox();
-				antialiasing = false;
-
-				playAnim('idle');
-
-				iconName = 'badai';
-
-				iconRPC = 'icon_badai';
-
-			case 'batai':
-				// BADAI SHITE ANIMATION LOADING CODE
-				tex = Paths.getSparrowAtlas('characters/batai');
-				frames = tex;
-				animation.addByPrefix('idle', 'IDLE', 24, false);
-				animation.addByPrefix('singUP', 'UP', 24, false);
-				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
-				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
-
-				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singRIGHT");
-				addOffset("singLEFT");
-				addOffset("singDOWN");
-				setGraphicSize(Std.int(width * furiosityScale), Std.int(height * furiosityScale));
-				updateHitbox();
-				antialiasing = false;
-
-				playAnim('idle');
-
-				iconName = 'badai';
-
-				iconRPC = 'icon_badai';
 
 			case 'tunnel-dave':
 				// DAVE SHITE ANIMATION LOADING CODE
